@@ -1,0 +1,36 @@
+(NOTE : This project is done on Mac - hence the CLI/Terminal commands are accordingly mentioned)
+
+- Clone repo : git clone https://github.com/SoubhikSinha/Weather-ETL-Airflow-Astro.git
+
+- Install Astro CLI : brew install astro (Prerequisite : Docker must be installed and running in your system)
+
+- Initializing Astro Project : astro dev init
+
+- Install airflow : pip install apache-airflow (if you want to make a new virtual env - it's upto you)
+
+- Run the workflow : astro dev start
+    - If you made any changes in the code, you can restart the workflow : astro dev restart
+
+- After executing the above command, you will witness the Airflow dashboard (username:pwd = admin:admin (by default))
+
+- Go to : Admin > Connections > 👇
+    - Connection 1 : Postgres ⬇️
+        - Connection Id : postgres_default
+        - Connection Type : Postgres
+        - Host : [ Look for the project containers and copy the name of the 'postgres' container]
+        - Database : postgres
+        - Login : postgres
+        - Password : postgres
+        - Port : 5432
+
+    - Connection 2 : OPEN METEO API ⬇️
+        - Connection Id : open_meteo_api
+        - Connection Type : HTTP
+        - Host : https://api.open-meteo.com
+
+
+ - Go to 'weather-etl-pipeline' under 'DAGs', and click "Trigger DAG : [ Looks like '▶️' ]
+
+- Once it runs succesfully, you can check for the output : Admin > XComs [ For every ETL component ] and even the Event Logs
+
+- If you want to check whether data is getting stored in Postgres OR not, you can make use of [dbeaver](https://dbeaver.io/download/)
